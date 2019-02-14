@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EMS.Model;
+using EMS.service.Models;
 
 namespace EMS.service.Business.Interface
 {

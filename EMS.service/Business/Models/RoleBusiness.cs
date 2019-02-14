@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EMS.Model;
+using EMS.service.Models;
 using GMS.Data.DBContext.Models;
 using EMS.service.DBContex;
 using EMS.service.Business.Interface;
@@ -16,6 +16,11 @@ namespace EMS.service.Business.Models
         private readonly IUnitOfWork unitOfWork;
         private readonly RoleRepository roleRepository;
 
+        public RoleBusiness()
+        {
+            unitOfWork = new UnitOfWork();
+            roleRepository = new RoleRepository(unitOfWork);
+        }
         public RoleBusiness(IUnitOfWork _unitOfWork)
         {
 
@@ -27,7 +32,7 @@ namespace EMS.service.Business.Models
 
         public List<RoleModel> GetAllRoles()
         {
-            List<RoleModel> list = roleRepository.GetAll().Select(m => new RoleModel { Description = m.Description }).ToList();
+            List<RoleModel> list = roleRepository.GetAll().Select(m => new RoleModel { Description = m.Description , ID = m.ID}).ToList();
             return list;
         }
 
@@ -43,9 +48,8 @@ namespace EMS.service.Business.Models
                 if (role != null)
                 {
                     role.Description = roleModel.Description;
-                    role.Description = roleModel.Description;
-
-                    //emp.Surname = empModel.Surname;
+                    role.ID = roleModel.ID;
+                    role.RateID = roleModel.RateID;
                     roleRepository.Update(role);
                     result = "updated";
 
@@ -56,10 +60,8 @@ namespace EMS.service.Business.Models
                 Role role = new Role();
 
                 role.Description = roleModel.Description;
-                role.Description = roleModel.Description;
-                // emp.IDNumber = empModel.IDNumber;
-                //emp.IsDeleted = false;
-
+                role.ID = roleModel.ID;
+                role.RateID = roleModel.RateID;
                 var record = roleRepository.Insert(role);
 
                 result = "Inserted";

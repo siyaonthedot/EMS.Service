@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using EMS.Model;
+using EMS.service.Models;
 using System.Text;
 
 namespace EMS.service
@@ -23,6 +23,16 @@ namespace EMS.service
 
         [OperationContract]
         string  CreateRole(RoleModel model);
+
+        [OperationContract]
+
+        List<RateModel> GetAllRates();
+        [OperationContract]
+
+        List<EmployeeModel> GetAllEmployees();
+        [OperationContract]
+
+        List<RoleModel> GetAllRoles();
     }
 
 

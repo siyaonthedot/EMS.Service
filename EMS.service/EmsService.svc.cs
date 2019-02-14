@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using EMS.Model;
+using EMS.service.Models;
 using EMS.service.Business.Interface;
+using EMS.service.Business.Models;
+using GMS.Data.DBContext.Models;
+using GMS.Data.DBContext.Interface;
 using System.Text;
 
 namespace EMS.service
@@ -13,19 +16,19 @@ namespace EMS.service
     // NOTE: In order to launch WCF Test Client for testing this service, please select EmsService.svc or EmsService.svc.cs at the Solution Explorer and start debugging.
     public class EmsService : IEmsService
     {
-        private IEmployee _iemployee { get; set; }
-        private IRate _irate;
-        private IRole _irole;
+        //private UnitOfWork unitOfWork; //= new UnitOfWork();
+        private IEmployee _iemployee = new EmployeeBusiness();
+        private IRate _irate = new RateBusiness();
+        private IRole _irole = new RoleBusiness();
 
-        public void DoWork() 
-        {
-        }
-
+        public void DoWork() { } 
+        
+        
         public string CreateRate(RateModel model)
         {
-           // _irate.AddUpdateEmployee()
+            string result = _irate.AddUpdateRate(model);
 
-            return string.Empty;
+            return result;
         }
         public string CreateEmployee(EmployeeModel model)
         {
@@ -33,11 +36,47 @@ namespace EMS.service
 
             return result;
         }
+
         public string CreateRole(RoleModel model)
         {
+            string result = _irole.AddUpdateRole(model);
 
-            return string.Empty;
+            return result;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<RateModel> GetAllRates()
+        {
+            var list = _irate.GetAllRates();
+
+            return list;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<RoleModel> GetAllRoles()
+        {
+            var list = _irole.GetAllRoles();
+
+            return list;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<EmployeeModel> GetAllEmployees()
+
+        {
+            var list = _iemployee.GetAllEmployee();
+
+            return list;
+        }
+
     }
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EMS.Model;
+using EMS.service.Models;
 using GMS.Data.DBContext.Models;
 using EMS.service.DBContex;
 using EMS.service.Business.Interface;
@@ -16,6 +16,12 @@ namespace EMS.service.Business.Models
         private readonly IUnitOfWork unitOfWork;
         private readonly EmployeeRepository empRepository;
 
+        public EmployeeBusiness()
+        {
+            unitOfWork = new UnitOfWork();
+            empRepository = new EmployeeRepository(unitOfWork);
+        }
+
         public EmployeeBusiness(IUnitOfWork _unitOfWork)
         {
 
@@ -27,7 +33,7 @@ namespace EMS.service.Business.Models
 
         public List<EmployeeModel> GetAllEmployee()
         {
-            List<EmployeeModel> list = empRepository.GetAll().Select(m => new EmployeeModel { Name = m.Name, Surname = m.Surname, IDNumber = m.IDNumber.ToString() }).ToList();
+            List<EmployeeModel> list = empRepository.GetAll().Select(m => new EmployeeModel { Name = m.Name, Surname = m.Surname, IDNumber = m.IDNumber.ToString(), ID = m.ID }).ToList();
             return list;
         }
 
@@ -55,9 +61,9 @@ namespace EMS.service.Business.Models
 
                 emp.Name = empModel.Name;
                 emp.Surname = empModel.Surname;
-               // emp.IDNumber = empModel.IDNumber;
-                //emp.IsDeleted = false;
-
+                emp.IDNumber = empModel.IDNumber;
+                emp.RoleID =  Convert.ToInt32(empModel.SelectedRole);
+                emp.DateHired = DateTime.Now; ;
                 var record = empRepository.Insert(emp);
 
                 result = "Inserted";

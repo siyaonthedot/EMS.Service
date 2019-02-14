@@ -17,7 +17,6 @@ namespace EMS.service.DBContex
         public int ID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public Nullable<System.DateTime> DOB { get; set; }
         public string IDNumber { get; set; }
         public Nullable<System.DateTime> DateHired { get; set; }
         public Nullable<int> RoleID { get; set; }

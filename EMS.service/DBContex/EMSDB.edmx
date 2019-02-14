@@ -12,9 +12,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" />
-          <Property Name="DOB" Type="date" />
           <Property Name="IDNumber" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateHired" Type="datetime" />
+          <Property Name="DateHired" Type="datetime2" Precision="7" />
           <Property Name="RoleID" Type="int" />
         </EntityType>
         <EntityType Name="Rate">
@@ -147,9 +146,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DOB" Type="DateTime" Precision="0" />
           <Property Name="IDNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateHired" Type="DateTime" Precision="3" />
+          <Property Name="DateHired" Type="DateTime" Precision="7" />
           <Property Name="RoleID" Type="Int32" />
           <NavigationProperty Name="Role" Relationship="EMSDBModel.FK_Employee_Role" FromRole="Employee" ToRole="Role" />
         </EntityType>
@@ -206,7 +204,6 @@
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="DateHired" ColumnName="DateHired" />
                 <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
