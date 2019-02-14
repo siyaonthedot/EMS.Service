@@ -28,6 +28,21 @@ namespace EMS.service.Business.Models
             roleRepository = new RoleRepository(unitOfWork);
         }
 
+
+        public RoleModel GetRoleByID(int id)
+        {
+            Role role = roleRepository.SingleOrDefault(m => m.ID == id);
+
+            if (role != null)
+            {
+                RoleModel roleModel = new RoleModel();
+                roleModel.ID = role.ID;
+                roleModel.Description = role.Description;
+                return roleModel;
+            }
+            return null;
+        }
+
         #region
 
         public List<RoleModel> GetAllRoles()
@@ -37,6 +52,12 @@ namespace EMS.service.Business.Models
         }
 
         #endregion
+
+        public void DeleteRole(int id)
+        {
+            roleRepository.Delete(m => m.ID == id);
+        }
+
 
         public string AddUpdateRole(RoleModel roleModel)
         {
@@ -52,7 +73,6 @@ namespace EMS.service.Business.Models
                     role.RateID = roleModel.RateID;
                     roleRepository.Update(role);
                     result = "updated";
-
                 }
             }
             else

@@ -17,22 +17,22 @@ namespace EMS.service
 
         [OperationContract]
         string CreateRate(RateModel model);
-
         [OperationContract]
         string  CreateEmployee(EmployeeModel model);
-
         [OperationContract]
         string  CreateRole(RoleModel model);
-
         [OperationContract]
-
         List<RateModel> GetAllRates();
         [OperationContract]
-
         List<EmployeeModel> GetAllEmployees();
         [OperationContract]
-
         List<RoleModel> GetAllRoles();
+        [OperationContract]
+        RateModel GetRateByID(int id);
+        [OperationContract]
+        RoleModel GetRoleByID(int id);
+        [OperationContract]
+        EmployeeModel GetEmployeeByID(int id);
     }
 
 

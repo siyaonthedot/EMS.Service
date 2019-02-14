@@ -33,10 +33,32 @@ namespace EMS.service.Business.Models
 
         public List<RateModel> GetAllRates()
         {
-            List<RateModel> list = rateRepository.GetAll().Select(m => new RateModel { Description = m.Description, ID = m.ID }).ToList();
+            List<RateModel> list = rateRepository.GetAll().
+           Select(m => new RateModel { Description = m.Description, ID = m.ID, Amount = m.Amount }).ToList();
             return list;
         }
 
+
+        public RateModel GetRateByID(int id)
+        {
+            Rate rate = rateRepository.SingleOrDefault(m=> m.ID == id);
+            if (rate != null)
+            {
+                RateModel rateModel = new RateModel();
+                rateModel.ID = rate.ID;
+                rateModel.Amount = rate.Amount;
+                rateModel.Description = rate.Description;
+                rateModel.ID = rate.ID;
+                return rateModel;
+            }
+            return null;
+        }
+
+        public void DeleteRate(int id)
+        {
+            rateRepository.Delete(m => m.ID == id);
+        }
+ 
         #endregion
 
         public string AddUpdateRate(RateModel rateModel)

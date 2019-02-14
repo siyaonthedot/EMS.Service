@@ -33,11 +33,37 @@ namespace EMS.service.Business.Models
 
         public List<EmployeeModel> GetAllEmployee()
         {
-            List<EmployeeModel> list = empRepository.GetAll().Select(m => new EmployeeModel { Name = m.Name, Surname = m.Surname, IDNumber = m.IDNumber.ToString(), ID = m.ID }).ToList();
+            List<EmployeeModel> list = empRepository.GetAll().Select(m => new EmployeeModel
+            { Name = m.Name, Surname = m.Surname, IDNumber = m.IDNumber.ToString(), ID = m.ID }).ToList();
             return list;
         }
 
         #endregion
+
+        public void DeleteEmployee(int id)
+        {
+            empRepository.Delete(m => m.ID == id);
+        }
+
+
+        public EmployeeModel GetEmployeeByID(int id)
+        {
+            Employee emp = empRepository.SingleOrDefault(m => m.ID == id);
+
+            if (emp != null)
+            {
+                EmployeeModel empModel = new EmployeeModel();
+                empModel.ID = emp.ID;
+                empModel.Name = emp.Name;
+                empModel.Surname = emp.Surname;
+                empModel.IDNumber = emp.IDNumber;
+                empModel.DateHired = emp.DateHired ?? DateTime.Now;
+                empModel.SelectedRole = emp.RoleID?.ToString();
+
+                return empModel;
+            }
+            return null;
+        }
 
         public string AddUpdateEmployee(EmployeeModel empModel)
         {
@@ -58,14 +84,12 @@ namespace EMS.service.Business.Models
             else
             {
                 Employee emp = new Employee();
-
                 emp.Name = empModel.Name;
                 emp.Surname = empModel.Surname;
                 emp.IDNumber = empModel.IDNumber;
                 emp.RoleID =  Convert.ToInt32(empModel.SelectedRole);
                 emp.DateHired = DateTime.Now; ;
                 var record = empRepository.Insert(emp);
-
                 result = "Inserted";
             }
 

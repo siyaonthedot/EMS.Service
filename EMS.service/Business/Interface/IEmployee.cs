@@ -10,5 +10,8 @@ namespace EMS.service.Business.Interface
     {
          List<EmployeeModel> GetAllEmployee();
         string AddUpdateEmployee(EmployeeModel empModel);
+        EmployeeModel GetEmployeeByID(int id);
+        void DeleteEmployee(int id);
+
     }
 }

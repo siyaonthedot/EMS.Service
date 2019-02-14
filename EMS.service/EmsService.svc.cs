@@ -21,9 +21,9 @@ namespace EMS.service
         private IRate _irate = new RateBusiness();
         private IRole _irole = new RoleBusiness();
 
-        public void DoWork() { } 
-        
-        
+        public void DoWork() { }
+
+
         public string CreateRate(RateModel model)
         {
             string result = _irate.AddUpdateRate(model);
@@ -70,12 +70,44 @@ namespace EMS.service
         /// </summary>
         /// <returns></returns>
         public List<EmployeeModel> GetAllEmployees()
-
         {
             var list = _iemployee.GetAllEmployee();
 
             return list;
         }
+
+        public RoleModel GetRoleByID(int id)
+        {
+            var role = _irole.GetRoleByID(id);
+            return role;
+        }
+
+        public EmployeeModel GetEmployeeByID(int id)
+        {
+            var emp = _iemployee.GetEmployeeByID(id);
+            return emp;
+        }
+        public RateModel GetRateByID(int id)
+        {
+            var rate = _irate.GetRateByID(id);
+
+            return rate;
+        }
+
+        public void DeleteRole(int id)
+        {
+            _irole.DeleteRole(id);
+        }
+
+        public void DeleteEmployee(int id)
+        {
+            _iemployee.DeleteEmployee(id);
+        }
+        public void DeleteRate(int id)
+        {
+            _irate.DeleteRate(id);
+        }
+
 
     }
 

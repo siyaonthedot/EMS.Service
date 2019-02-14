@@ -11,5 +11,7 @@ namespace EMS.service.Business.Interface
     {
         List<RateModel> GetAllRates();
         string AddUpdateRate(RateModel empModel);
+        RateModel GetRateByID(int id);
+        void DeleteRate(int id);
     }
 }

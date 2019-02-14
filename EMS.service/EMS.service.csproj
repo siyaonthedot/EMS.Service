@@ -102,7 +102,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EMSDBService.svc" />
     <Content Include="packages.config" />
     <EntityDeploy Include="DBContex\EMSDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -160,7 +159,6 @@
     <Compile Include="DBContex\Interface\IBaseRepository.cs" />
     <Compile Include="DBContex\Interface\IUnitOfWork.cs" />
     <Compile Include="DBContex\Models\BaseRepository.cs" />
-    <Compile Include="DBContex\Models\Class1.cs" />
     <Compile Include="DBContex\Models\EmployeeRepository.cs" />
     <Compile Include="DBContex\Models\RateRepository.cs" />
     <Compile Include="DBContex\Models\RoleRepository.cs" />
@@ -173,9 +171,6 @@
     </Compile>
     <Compile Include="DBContex\sysdiagram.cs">
       <DependentUpon>EMSDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EMSDBService.svc.cs">
-      <DependentUpon>EMSDBService.svc</DependentUpon>
     </Compile>
     <Compile Include="EmsService.svc.cs">
       <DependentUpon>EmsService.svc</DependentUpon>

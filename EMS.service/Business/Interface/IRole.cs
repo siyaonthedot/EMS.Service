@@ -11,5 +11,8 @@ namespace EMS.service.Business.Interface
     {
         List<RoleModel> GetAllRoles();
         string AddUpdateRole(RoleModel roleModel);
+        RoleModel GetRoleByID(int id);
+        void DeleteRole(int id);
+
     }
 }
